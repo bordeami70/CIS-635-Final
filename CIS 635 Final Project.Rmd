@@ -133,3 +133,115 @@ customer6ts <- ts(customer6$Quantity, frequency = 52, start = c(2021,18), end = 
 #subtitle = "Customer1") +
 #scale_y_continuous()
 ```
+```{r}
+
+
+
+c1Arima <- arima(customer1ts,order=c(2,2,1))
+
+c1Forecast <- forecast(c1Arima, h =52)
+plot(c1Forecast)
+
+c2Arima <- arima(customer2ts,order=c(2,2,1))
+
+c2Forecast <- forecast(c2Arima, h =52)
+plot(c2Forecast)
+
+c3Arima <- arima(customer3ts,order=c(2,2,1))
+
+c3Forecast <- forecast(c3Arima, h =52)
+plot(c3Forecast)
+
+c4Arima <- arima(customer4ts,order=c(2,2,1))
+
+c4Forecast <- forecast(c4Arima, h =52)
+plot(c4Forecast)
+
+c5Arima <- arima(customer5ts,order=c(2,2,1))
+
+c5Forecast <- forecast(c5Arima, h =52)
+plot(c5Forecast)
+
+c6Arima <- arima(customer6ts,order=c(2,2,1))
+
+c6Forecast <- forecast(c6Arima, h =52)
+plot(c6Forecast)
+```
+
+
+```{r}
+plot(customer1ts)
+plot(customer2ts)
+plot(customer3ts)
+plot(customer4ts)
+plot(customer5ts)
+plot(customer6ts)
+
+```
+```{r}
+#regression
+
+
+
+# add a regression line to the scatterplot
+ggplot(data = customer1ts, aes(x = time(customer1ts), y = customer1ts)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+
+
+
+# add a regression line to the scatterplot
+ggplot(data = customer2ts, aes(x = time(customer2ts), y = customer2ts)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+
+
+
+# add a regression line to the scatterplot
+ggplot(data = customer3ts, aes(x = time(customer3ts), y = customer3ts)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+
+
+# add a regression line to the scatterplot
+ggplot(data = customer4ts, aes(x = time(customer4ts), y = customer4ts)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+
+
+
+# add a regression line to the scatterplot
+ggplot(data = customer5ts, aes(x = time(customer5ts), y = customer5ts)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+
+
+
+# add a regression line to the scatterplot
+ggplot(data = customer6ts, aes(x = time(customer6ts), y = customer6ts)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+
+
+```
+```{r}
+# use the ets() function from the forecast package to fit an ETS model to the time series
+etsC1 <- ets(customer1ts)
+etsC2 <- ets(customer2ts)
+etsC3 <- ets(customer3ts)
+etsC4 <- ets(customer4ts)
+etsC5 <- ets(customer5ts)
+etsC6 <- ets(customer6ts)
+
+plot(etsC1)
+plot(etsC2)
+plot(etsC3)
+plot(etsC4)
+plot(etsC5)
+plot(etsC6)
+
+
+
+
+```
+
