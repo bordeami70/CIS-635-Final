@@ -1,0 +1,135 @@
+---
+title: "CIS 635 Final"
+author: "Michael Bordeaux"
+date: "2022-12-15"
+output: pdf_document
+---
+
+```{r include=FALSE}
+library(tidyverse)
+library(lubridate)
+forecast_data <- read_csv("ActualConsumptionForAnalysis.csv")
+library(stats)
+library(zoo)
+library(forecast)
+library(ggplot2)
+
+```
+
+```{r include=FALSE}
+##create customer objects
+
+customer1 <- filter(forecast_data, Customer == "Customer 1")
+customer2 <- filter(forecast_data, Customer == "Customer 2")
+customer3 <- filter(forecast_data, Customer == "Customer 3")
+customer4 <- filter(forecast_data, Customer == "Customer 4")
+customer5 <- filter(forecast_data, Customer == "Customer 5")
+customer6 <- filter(forecast_data, Customer == "Customer 6")
+
+
+```
+
+```{r include=FALSE}
+customer1$Date <- mdy(customer1$Date)
+customer2$Date <- mdy(customer2$Date)
+customer3$Date <- mdy(customer3$Date)
+customer4$Date <- mdy(customer4$Date)
+customer5$Date <- mdy(customer5$Date)
+customer6$Date <- mdy(customer6$Date)
+```
+
+
+
+```{r include=FALSE}
+customer1 <- customer1 %>%
+    mutate(week = week(Date),
+           year  = year(Date)) %>%
+    mutate(week_year = paste(week, year, sep = "-")) %>%
+    select(-week,-year) %>% 
+    group_by(week_year) %>%
+    summarise(Quantity = sum(Quantity))
+
+customer1ts <- ts(customer1$Quantity, frequency = 52, start = c(2021,18), end = c(2022, 15))
+
+```
+
+```{r}
+#customer2 <- customer2 %>%
+#    mutate(week = week(Date),
+#           year  = year(Date)) %>%
+#    mutate(week_year = paste(week, year, sep = "-")) %>% 
+#    group_by(week_year) %>%
+#    summarise(Quantity = sum(Quantity))
+```
+
+
+```{r}
+customer2 <- customer2 %>%
+    mutate(week = week(Date),
+           year  = year(Date)) %>%
+    mutate(week_year = paste(week, year, sep = "-")) %>%
+    select(-week,-year) %>% 
+    group_by(week_year) %>%
+    summarise(Quantity = sum(Quantity))
+
+customer2ts <- ts(customer2$Quantity, frequency = 52, start = c(2021,18), end = c(2022, 16))
+
+```
+
+```{r}
+customer3 <- customer3 %>%
+    mutate(week = week(Date),
+           year  = year(Date)) %>%
+    mutate(week_year = paste(week, year, sep = "-")) %>%
+    select(-week,-year) %>% 
+    group_by(week_year) %>%
+    summarise(Quantity = sum(Quantity))
+
+customer3ts <- ts(customer3$Quantity, frequency = 52, start = c(2021,18), end = c(2022, 15))
+```
+
+```{r}
+customer4 <- customer4 %>%
+    mutate(week = week(Date),
+           year  = year(Date)) %>%
+    mutate(week_year = paste(week, year, sep = "-")) %>%
+    select(-week,-year) %>% 
+    group_by(week_year) %>%
+    summarise(Quantity = sum(Quantity))
+
+customer4ts <- ts(customer4$Quantity, frequency = 52, start = c(2021,18), end = c(2022, 15))
+```
+
+```{r}
+customer5 <- customer5 %>%
+    mutate(week = week(Date),
+           year  = year(Date)) %>%
+    mutate(week_year = paste(week, year, sep = "-")) %>%
+    select(-week,-year) %>% 
+    group_by(week_year) %>%
+    summarise(Quantity = sum(Quantity))
+
+customer5ts <- ts(customer5$Quantity, frequency = 52, start = c(2021,18), end = c(2022, 14))
+```
+
+```{r}
+customer6 <- customer6 %>%
+    mutate(week = week(Date),
+           year  = year(Date)) %>%
+    mutate(week_year = paste(week, year, sep = "-")) %>%
+    select(-week,-year) %>% 
+    group_by(week_year) %>%
+    summarise(Quantity = sum(Quantity))
+
+customer6ts <- ts(customer6$Quantity, frequency = 52, start = c(2021,18), end = c(2022, 15))
+```
+
+
+```{r}
+#customer1 %>% 
+#ggplot(aes(x = week_year, y = Quantity, group = week_year)) +
+#geom_area(aes(fill = week_year), position = "stack") +
+#labs(title = "Quantity Sold: Week Plot", x = "", y = "Sales",
+#subtitle = "Customer1") +
+#scale_y_continuous()
+```
