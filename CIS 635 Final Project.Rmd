@@ -233,12 +233,19 @@ etsC4 <- ets(customer4ts)
 etsC5 <- ets(customer5ts)
 etsC6 <- ets(customer6ts)
 
-plot(etsC1)
-plot(etsC2)
-plot(etsC3)
-plot(etsC4)
-plot(etsC5)
-plot(etsC6)
+etsC1forecast <- forecast(etsC1, h= 12)
+etsC2forecast <- forecast(etsC2, h= 12)
+etsC3forecast <- forecast(etsC3, h= 12)
+etsC4forecast <- forecast(etsC4, h= 12)
+etsC5forecast <- forecast(etsC5, h= 12)
+etsC6forecast <- forecast(etsC6, h= 12)
+
+plot(etsC1forecast)
+plot(etsC2forecast)
+plot(etsC3forecast)
+plot(etsC4forecast)
+plot(etsC5forecast)
+plot(etsC6forecast)
 
 
 
